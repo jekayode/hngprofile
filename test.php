@@ -104,23 +104,36 @@ $username = "hcvwvprmyw";
 $password = "bqcX3PaeBb";
 $dbname = "hcvwvprmyw";
 
-$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+try {
+
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$statement = $conn->prepare("INSERT INTO coins(name, pair, buy, sell, rec_date)
-    VALUES(:id, :name, :pair, :buy, :sell, :rec_date)");
-        
-        foreach($json as $row)
-        {
-        $statement->execute(array(
-            "id" => $row['id'],
-            "name" => $row['name'],
-            "pair" => $row['pair'],
-            "buy" => $row['buy'],
-            "sell" => $row['sell'],
-            "rec_date" => NOW(),
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
+    VALUES (:name, :pair, :buy, :sell, :rec_date)");
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':pair', $pair);
+    $stmt->bindParam(':buy', $buy);
+    $stmt->bindParam(':sell', $sell);
+
+    foreach($json as $row){
+        $stmt->execute(array(
+            "$name" => $row['name'],
+            "$pair" => $row['pair'],
+            "$buy" => $row['buy'],
+            "$sell" => $row['sell'],
+            "$rec_date" => NOW(),
         ));
-        }
+        } echo "Good Job!! Records Inserted";
+    } catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    }
+$conn = null;
+
+
 
 
 

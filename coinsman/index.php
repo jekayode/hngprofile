@@ -26,7 +26,7 @@
             <div><p>1</p><p class="currency-name"><?php echo $coin['name']; ?></p></div>
             <p class="bought second">Buys: <?php echo $coin['buy']; ?> BTC</p>            
             <p class="sold third">Sells: <?php echo $coin['sell']; ?> Units</p>
-            <p class="status fourth"><span class="fa fa-arrow-up"><?php echo "Total Trade ".$coin['total_trade']; ?></span></p>        
+            <p class="status fourth"><span class="fa fa-arrow-up"><?php echo "Total Trade ".$coin['total_trade']; ?></span></p>
         </div>
         <?php } ?>
     </div>

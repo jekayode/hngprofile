@@ -1,4 +1,8 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 1);
+
+
 $conn = null;
 // Acquire DB connection
 $servername = "localhost";
@@ -15,11 +19,11 @@ try {
     
 } catch(PDOException $e) {
             die("Error: " . $e->getMessage());
-      }
+}
 
 function saveToDb($data) {
     global $conn;
-    
+
     $name = $data['name'];
     $pair = $data['pair'];
     $buy = $data['buy'];

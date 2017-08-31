@@ -2,6 +2,8 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
+$conn = null;
+
 // Acquire DB connection
 $servername = "localhost";
 $username = "hcvwvprmyw";
@@ -9,6 +11,8 @@ $password = "bqcX3PaeBb";
 $dbname = "hcvwvprmyw";
 
 try {    
+    global $conn;
+    
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -18,6 +22,7 @@ try {
 }
 
 function saveToDb($data) {
+    global $conn;
 
     $name = $data['name'];
     $pair = $data['pair'];

@@ -95,4 +95,105 @@ usort($data, function($a, $b) {
 });
 $json = json_encode($data, true);
 // json_encode($data);
-echo $json;
+//echo $json;
+
+?>
+
+<table>
+    <thead id="headings">
+        <tr>
+            <th id="f_name">First Name</th>
+            <th id="l_name">Last Name</th>
+            <th id="age">Age</th>
+        </tr>
+    </thead>
+    <tbody id="results">
+        <!-- this will be auto-populated -->
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+
+
+var arr = [
+    {
+        name: 'George',
+        pair: 'Washington',
+        buy: 279,
+        sell: 300
+    },
+     {
+        name: 'George',
+        pair: 'Washington',
+        buy: 279,
+        sell: 300
+    },
+     {
+        name: 'George',
+        pair: 'Washington',
+        buy: 279,
+        sell: 300
+    },
+     {
+        name: 'George',
+        pair: 'Washington',
+        buy: 279,
+        sell: 300
+    },
+     {
+        name: 'George',
+        pair: 'Washington',
+        buy: 279,
+        sell: 300
+    }
+    
+];
+
+
+
+    $(function() {
+    $('#headings th').click(function() {
+        var id = $(this).attr('id');
+        var asc = (!$(this).attr('asc')); // switch the order, true if not set
+        
+        // set asc="asc" when sorted in ascending order
+        $('#headings th').each(function() {
+            $(this).removeAttr('asc');
+        });
+        if (asc) $(this).attr('asc', 'asc');
+        
+        sortResults(id, asc);
+    });
+        
+    showResults();
+});
+
+function sortResults(prop, asc) {
+    arr = arr.sort(function(a, b) {
+        if (asc) return (a[prop] > b[prop]);
+        else return (b[prop] > a[prop]);
+    });
+    showResults();
+}
+
+function showResults () {
+    var html = '';
+    for (var e in arr) {
+        html += '<tr>'
+            +'<td>'+arr[e].name+'</td>'
+            +'<td>'+arr[e].pair+'</td>'
+            +'<td>'+arr[e].buy+'</td>'
+            +'<td>'+arr[e].sell+'</td>'
+        +'</tr>';
+    }
+    $('#results').html(html);
+}
+
+</script>
+
+
+
+
+
+

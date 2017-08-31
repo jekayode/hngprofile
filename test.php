@@ -91,22 +91,36 @@ foreach ($coins as $key => $coin) {
     }
 }
 
-function sort($a, $b)
-  {
-    return strnatcmp($a['buy'], $b['buy']);
-}
-
-  // sort alphabetically by name
-  usort($data, 'sort');
 //var_dump($data);
-//usort($data, function($a, $b) {
- //   return $a['buy'] <=> $b['buy'];
-//});
+usort($data, function($a, $b) {
+    return $a['buy'] <=> $b['buy'];
+});
 $json = json_encode($data, true);
 // json_encode($data);
-echo $json;
+//echo $json;
 
+$servername = "localhost";
+$username = "hcvwvprmyw";
+$password = "bqcX3PaeBb";
+$dbname = "hcvwvprmyw";
 
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // set the PDO error mode to exception
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$statement = $conn->prepare("INSERT INTO coins(name, pair, buy, sell, rec_date)
+    VALUES(:id, :name, :pair, :buy, :sell, :rec_date)");
+        
+        foreach($json as $row)
+        {
+        $statement->execute(array(
+            "id" => $row['id'],
+            "name" => $row['name'],
+            "pair" => $row['pair'],
+            "buy" => $row['buy'],
+            "sell" => $row['sell'],
+            "rec_date" => NOW(),
+        ));
+        }
 
 
 

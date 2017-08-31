@@ -94,7 +94,7 @@ foreach ($coins as $key => $coin) {
 
             //Go 24hrs back
             // Changed to 10 mins - 24hrs was returning error when I was testing. Took time to discover.
-            $then = $now - 54000; // 15hrs
+            $then = $now - 36000; // 10hrs
 
             /**
                     **  Call the poloniex API to get all trade history for the currency pair

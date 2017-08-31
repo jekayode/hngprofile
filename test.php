@@ -1,4 +1,17 @@
+<style type="text/css">
+    table {
+    margin: 3px;
+}
+table th {
+    font-weight: bold;
+    cursor: pointer;
+}
+table th, table td {
+    padding: 3px;
+    border: 1px solid #000;
+}
 
+</style>
 
 <table>
     <thead id="headings">

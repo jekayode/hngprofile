@@ -1,5 +1,6 @@
 <?php
 
+// Db connection Variable
 $conn = null;
 
 // Acquire DB connection

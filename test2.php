@@ -132,7 +132,7 @@ foreach ($coins as $key => $coin) {
 
                             $s['total_trade'] = $trade_buy + $trade_sell;
                             
-                            saveToDb($s);
+                            //saveToDb($s);
 
                             array_push($data, $s);
                             // $data[$i] = $s;
@@ -144,7 +144,7 @@ foreach ($coins as $key => $coin) {
 }
 
 usort($data, function ($a, $b) {
-    return $b['total_trade'] <=> $a['total_trade'];
+    return $a['total_trade'] <=> $b['total_trade'];
 });
 
 // In reverse/descending order

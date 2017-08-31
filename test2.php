@@ -12,7 +12,7 @@ $dbname = "hcvwvprmyw";
 
 try {    
     global $conn;
-    
+
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -28,15 +28,17 @@ function saveToDb($data) {
     $pair = $data['pair'];
     $buy = $data['buy'];
     $sell = $data['sell'];
+    $total_trade = $data['total_trade'];
     $rec_date = date("Y-m-d H:i:s");
 
-    $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
-    VALUES (:name, :pair, :buy, :sell, :rec_date)");
+    $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, total_trade, rec_date) 
+    VALUES (:name, :pair, :buy, :sell, :total_trade, :rec_date)");
 
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':pair', $pair);
     $stmt->bindParam(':buy', $buy);
     $stmt->bindParam(':sell', $sell);
+    $stmt->bindParam(':total_trade', $total_trade);
     $stmt->bindParam(':rec_date', $rec_date);
 
     $stmt->execute();

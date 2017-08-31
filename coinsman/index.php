@@ -1,4 +1,4 @@
-<?php include("../test2.php"); ?>
+<?php include("coins.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">

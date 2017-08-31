@@ -3,9 +3,10 @@
 <table>
     <thead id="headings">
         <tr>
-            <th id="f_name">First Name</th>
-            <th id="l_name">Last Name</th>
-            <th id="age">Age</th>
+            <th id="name">Name</th>
+            <th id="pair">Pair</th>
+            <th id="buy">Buy</th>
+            <th id="sell">Sell</th>
         </tr>
     </thead>
     <tbody id="results">

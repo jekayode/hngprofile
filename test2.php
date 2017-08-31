@@ -1,5 +1,44 @@
 <?php
 
+// Acquire DB connection
+$servername = "localhost";
+$username = "hcvwvprmyw";
+$password = "bqcX3PaeBb";
+$dbname = "hcvwvprmyw";
+
+try {
+    
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+} catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+      }
+
+function saveToDb($data) {
+
+    $name = $data['name'];
+    $pair = $data['pair'];
+    $buy = $data['buy'];
+    $sell = $data['sell'];
+    $rec_date = NOW();
+
+    $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
+    VALUES (:name, :pair, :buy, :sell, :rec_date)");
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':pair', $pair);
+    $stmt->bindParam(':buy', $buy);
+    $stmt->bindParam(':sell', $sell);
+    $stmt->bindParam(':rec_date', $rec_date);
+
+    $stmt->execute();
+
+
+    echo "Good Job!! Records Inserted";
+
+}
 
 /**
 **  Call the poloniex API to get all coins available
@@ -47,7 +86,8 @@ foreach ($coins as $key => $coin) {
             $now = time();
 
             //Go 24hrs back
-            $then = $now - 86400;
+            // Changed to 10 mins - 24hrs was returning error when I was testing. Took time to discover.
+            $then = $now - 600;
 
             /**
                     **  Call the poloniex API to get all trade history for the currency pair
@@ -81,8 +121,12 @@ foreach ($coins as $key => $coin) {
                             $s["buy"] = $trade_buy;
                             //    array_push($s, "sell => $trade_sell");
                             $s["sell"] = $trade_sell;
-                                       
-                               array_push($data, $s);
+
+                            $s['total_trade'] = $trade_buy + $trade_sell;
+                            
+                            saveToDb($s);
+
+                            array_push($data, $s);
                             // $data[$i] = $s;
 
                 
@@ -92,11 +136,58 @@ foreach ($coins as $key => $coin) {
 }
 
 usort($data, function ($a, $b) {
-    return $b['buy'] <=> $a['buy'];
+    return $b['total_trade'] <=> $a['total_trade'];
 });
 
+// In reverse/descending order
+$data = array_reverse($data);
 
+// cast to json
 $json = json_encode($data, true);
 
 echo $json;
+
+
+// try {
+
+//     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+//     // set the PDO error mode to exception
+//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//     $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
+//     VALUES (:name, :pair, :buy, :sell, :rec_date)");
+
+//     $stmt->bindParam(':name', $name);
+//     $stmt->bindParam(':pair', $pair);
+//     $stmt->bindParam(':buy', $buy);
+//     $stmt->bindParam(':sell', $sell);
+//     $stmt->bindParam(':rec_date', $rec_date);
+
+//     // insert another row
+//     $name = "KAY";
+//     $pair = "BTC_KAY";
+//     $buy = 230;
+//     $sell = 300;
+//     $rec_date = NOW();
+//     $stmt->execute();
+
+//     //foreach($data as $row)
+//    // {
+//     //    $stmt->execute(array(
+//    //         "name" => $row['name'],
+//    //         "pair" => $row['pair'],
+//    //         "buy" => $row['buy'],
+//    //         "sell" => $row['sell'],
+//    //         "rec_date" => NOW(),
+//    //     ));
+//     //} 
+
+//     echo "Good Job!! Records Inserted";
+
+    
+//     } catch(PDOException $e) {
+//     echo "Error: " . $e->getMessage();
+//     }
+
+$conn = null;
+
 ?>

@@ -2,17 +2,13 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-
-$conn = null;
 // Acquire DB connection
 $servername = "localhost";
 $username = "hcvwvprmyw";
 $password = "bqcX3PaeBb";
 $dbname = "hcvwvprmyw";
 
-try {
-        global $conn;
-    
+try {    
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -22,13 +18,12 @@ try {
 }
 
 function saveToDb($data) {
-    global $conn;
 
     $name = $data['name'];
     $pair = $data['pair'];
     $buy = $data['buy'];
     $sell = $data['sell'];
-    $rec_date = NOW();
+    $rec_date = date("Y-m-d H:i:s");
 
     $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
     VALUES (:name, :pair, :buy, :sell, :rec_date)");

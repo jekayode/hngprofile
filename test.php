@@ -114,18 +114,31 @@ try {
     $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
     VALUES (:name, :pair, :buy, :sell, :rec_date)");
 
-    foreach($data as $row){
-        $stmt->execute(array(
-            "$name" => $row['name'],
-            "$pair" => $row['pair'],
-            "$buy" => $row['buy'],
-            "$sell" => $row['sell'],
-            "$rec_date" => NOW(),
-        ));
-        } echo "Good Job!! Records Inserted";
+    // insert another row
+    $name = "KAY";
+    $pair = "BTC_KAY";
+    $buy = 230;
+    $sell = 300;
+    $rec_date = NOW();
+    $stmt->execute();
+
+    //foreach($data as $row)
+   // {
+    //    $stmt->execute(array(
+   //         "name" => $row['name'],
+   //         "pair" => $row['pair'],
+   //         "buy" => $row['buy'],
+   //         "sell" => $row['sell'],
+   //         "rec_date" => NOW(),
+   //     ));
+    //} 
+
+    echo "Good Job!! Records Inserted";
+
     } catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
     }
+
 $conn = null;
 
 

@@ -44,7 +44,7 @@ function saveToDb($data) {
     $stmt->execute();
 
 
-    echo "Good Job!! Records Inserted";
+    return "Good Job!! Records Inserted";
 
 }
 

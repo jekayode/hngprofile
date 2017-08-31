@@ -90,7 +90,7 @@ foreach ($coins as $key => $coin) {
         }
     }
 }
-var_dump($data);
+//var_dump($data);
 usort($data, function($a, $b) {
     return $a['buy'] <=> $b['buy'];
 });

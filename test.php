@@ -7,8 +7,6 @@
 **/
 $coins = file_get_contents('currencies.json');
 
-//$coins = file_get_contents('https://poloniex.com/public?command=returnCurrencies');
-
 // Convert JSOn resource to object
 $coins = json_decode($coins);
 
@@ -16,7 +14,6 @@ $coins = json_decode($coins);
 $coins = json_decode(json_encode($coins), true);
 
 $data = array();
-
 
             // Loop through coins array to get details for each coin
 foreach ($coins as $key => $coin) {
@@ -93,6 +90,9 @@ foreach ($coins as $key => $coin) {
         }
     }
 }
+usort($data, function($a, $b) {
+    return $a['buy'] <=> $b['buy'];
+});
 $json = json_encode($data, true);
-
+// json_encode($data);
 echo $json;

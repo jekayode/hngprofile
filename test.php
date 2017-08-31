@@ -90,13 +90,23 @@ foreach ($coins as $key => $coin) {
         }
     }
 }
+
+function sort($a, $b)
+  {
+    return strnatcmp($a['buy'], $b['buy']);
+}
+
+  // sort alphabetically by name
+  usort($data, 'sort');
 //var_dump($data);
-usort($data, function($a, $b) {
-    return $a['buy'] <=> $b['buy'];
-});
+//usort($data, function($a, $b) {
+ //   return $a['buy'] <=> $b['buy'];
+//});
 $json = json_encode($data, true);
 // json_encode($data);
 echo $json;
+
+
 
 
 

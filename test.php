@@ -114,12 +114,7 @@ try {
     $stmt = $conn->prepare("INSERT INTO coins (name, pair, buy, sell, rec_date) 
     VALUES (:name, :pair, :buy, :sell, :rec_date)");
 
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':pair', $pair);
-    $stmt->bindParam(':buy', $buy);
-    $stmt->bindParam(':sell', $sell);
-
-    foreach($json as $row){
+    foreach($data as $row){
         $stmt->execute(array(
             "$name" => $row['name'],
             "$pair" => $row['pair'],

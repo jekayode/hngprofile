@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Popular Cryptocurrencies</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/script.js"></script>
 </head>
 <body>
     <div id="banner">
-        <img src="img/coin.svg" id="icon" width="32" height="32">
+        <img src="../img/coin.svg" id="icon" width="32" height="32">
         <p> WILDFIRE</p>
     </div>
     <h2 id="heading">Most Popular Cryptocurrencies</h2>

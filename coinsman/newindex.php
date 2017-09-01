@@ -1,9 +1,10 @@
 <?php
 
-    require_once 'functions.php';
+    error_reporting(0);
+    require_once 'function/function.php';
 
  ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,53 +31,76 @@
 
       <div class="row">
 
-          <div class="col-md-8">
+          <div class="col-md-12">
 
-            <?php
+             <table class="table table-striped">
+                 <thead>
+                     <tr>
+                         <th>S/no</th>
+                         <th>Coin</th>
+                         <th>Currency Pair</th>
+                         <th>Buy trade Vol (30mins ago)</th>
+                         <th>Current Buy trade Vol</th>
+                         <th>% change in Buy trade Volume since the last 30mins</th>
+                         <th>Observations</th>
 
-                // Lets fetch record from database
-                $records = fetchRecords();
+                     </tr>
+                 </thead>
+                 <tbody>
 
-                // Initialize counter
-                $counter = 1;
+                   <?php
 
-                // Loop through records
-                foreach ($records as $key => $record) {
+                       // Lets fetch record from database
+                       $records = fetchRecords();
 
-             ?>
+                       // Initialize counter
+                       $counter = 1;
 
-            <!-- display -->
-            <div id="one" class="currency">
-                <div><p><?=$counter;?></p><p class="currency-name"><?=$record['coin'];?>  (<?=$record['currencypair'];?>)</p></div>
-                <p class="bought">Total no of buy: <?=$record['buy'];?></p>
-                <p class="sold">Total no of sell: <?=$record['sell'];?></p>
-                <!-- <p class="status"><span class="fa fa-arrow-up"></span> 0.05%</p> -->
-            </div>
+                       // Loop through records
+                       foreach ($records as $key => $record) {
 
-            <?php
-                  $counter++;
-                }
+                              $new_value = $record['current_buy'];
+                              $old_value = $record['buy'];
 
-                // Get the top coin as the most popular coin
-                $most_popular_coin = $records[0];
-
-                // Get the least coin as the least popular coin
-                $least_popular_coin = $records[61];
-            ?>
+                              $difference = abs($new_value - $old_value);
 
 
-          </div>
 
-          <div class="col-md-4">
-            <div id="observations">
-               <h4>Trade observations</h4>
-               <ol>
-                   <li class="observation"><b><?=$most_popular_coin['coin']?></b> is the most bought coin with <b><?=$most_popular_coin['buy']?> buys</b> and the most popular right now</li>
-                   <li class="observation"><b><?=$least_popular_coin['coin']?></b> is the least bought coin with <b><?=$least_popular_coin['buy']?> buys</b> and the least popular right now</li>
-                   <li class="observation">Observation 3</li>
-                   <li class="observation">Observation 4</li>
-               </ol>
-           </div>
+                              $percentage_change = ((($new_value - $old_value) / $old_value) * 100);
+
+                              $word = $percentage_change > 0 ? "an increase" : "a decrease";
+
+                    ?>
+                               <tr>
+                                 <td><?=$counter;?></td>
+                                 <td><?=$record['coin'];?></td>
+                                 <td><?=$record['currencypair'];?>_BTC</td>
+                                 <td><?=$record['buy'];?></td>
+                                 <td><?=$record['current_buy'];?></td>
+                                 <td><?=$percentage_change?>%</td>
+                                 <td>
+
+                                   <?=$record['coin'];?> has experienced <?=$word?> of <?=$difference?> trade buys in the last 30mins.
+
+
+
+                                 </td>
+                               </tr>
+
+                       <?php
+                               $counter++;
+                               }
+
+                               // Get the top coin as the most popular coin
+                               $most_popular_coin = $records[0];
+
+                               // Get the least coin as the least popular coin
+                               $least_popular_coin = $records[61];
+                        ?>
+
+               </tbody>
+               </table>
+
           </div>
 
       </div>

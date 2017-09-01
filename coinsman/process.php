@@ -26,11 +26,11 @@
         $date_saved = $record['date_saved'];
 
         // We can now move the records from current table to previous table to enable us delete all record in current table
-        $update = updatePreviousTable ($coin, $currencypair, $buy, $sell, $date_saved );
+        $update_previous_table = updatePreviousTable ($coin, $currencypair, $buy, $sell, $date_saved );
 
     }
 
-    if ($update) {
+    if ($update_previous_table) {
 
         // Lets Delete all records in the current table since we have moved them to the previous table
         deleteCurrentRecords ();
@@ -50,7 +50,7 @@
         //Get current time in UNIX timestamp
         $now = time();
 
-        //Get current time in UNIX timestamp
+        //Lets go back 30mins
         $then = $now - 1800;
 
         // Loop through coins array to get details for each coin
@@ -108,7 +108,7 @@
 
                     }
 
-                    $update = updateCurrentTable ($coin_name, $currency, $trade_sell, $trade_buy, $now );
+                    $update_current_table = updateCurrentTable ($coin_name, $currency, $trade_sell, $trade_buy, $now);
 
                 }
 
@@ -125,8 +125,6 @@
     }
 
     redirect('index.php');
-
-
 
 ?>
 

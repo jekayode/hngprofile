@@ -160,7 +160,9 @@
                   <p>
                       Top Coin 5mins ago :
                   </p>
+                  <br>
                   <p>
+                      Current Top Coin:
                       <?=$most_popular_coin?> seems to be gaining the attention right now having a greater percentage shift of <?=$most_popular_coin_value?>%
                   </p>
               </div>

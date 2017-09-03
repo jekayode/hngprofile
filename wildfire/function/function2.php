@@ -12,47 +12,6 @@
         }
     }
 
-    function GetPrevTopCoin()
-    {
-
-      $dsn = 'mysql:host=localhost;dbname=hcvwvprmyw';
-      $pdo = new PDO($dsn, 'hcvwvprmyw', 'bqcX3PaeBb');
-      $query = $pdo->prepare('SELECT buy, coin, currencypair FROM previous ORDER BY buy DESC LIMIT 1');
-      if ($query->execute()) {
-        $records = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $records;
-      }
-
-    }
-
-    function GetCurrentTopCoinDetails($coin)
-    {
-
-      $dsn = 'mysql:host=localhost;dbname=hcvwvprmyw';
-      $pdo = new PDO($dsn, 'hcvwvprmyw', 'bqcX3PaeBb');
-      $query = $pdo->prepare('SELECT buy, coin, currencypair, current_buy FROM previous WHERE coin = :coin');
-      $query->bindParam(':coin' , $coin);
-      if ($query->execute()) {
-        $records = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $records;
-      }
-
-    }
-
-    function GetPrevTopCoinNewBuyTrade($currencypair)
-    {
-
-      $dsn = 'mysql:host=localhost;dbname=hcvwvprmyw';
-      $pdo = new PDO($dsn, 'hcvwvprmyw', 'bqcX3PaeBb');
-      $query = $pdo->prepare('SELECT current_buy FROM previous WHERE currencypair = :currencypair');
-      $query->bindParam(':currencypair' ,$currencypair);
-      if ($query->execute()) {
-        $records = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $records;
-      }
-
-    }
-
     function selectTotalCurrentBuy()
     {
 

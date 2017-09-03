@@ -67,9 +67,13 @@
                        // Lets fetch record from database
                        $records = fetchRecords();
 
-                       echo "<pre>";
+                       $top_coin = $records[0]['coin'];
 
-                       var_dump($records);
+                       $top_coin_buy = $records[0]['coin'];
+
+                      //  echo "<pre>";
+                       //
+                      //  var_dump($records);
 
                        $total_trade_volume_resources = selectTotalCurrentBuy();
 

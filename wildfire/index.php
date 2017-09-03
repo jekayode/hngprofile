@@ -36,7 +36,7 @@
         <img src="img/coin.svg" id="icon" width="32" height="32">
         <p> WILDFIRE</p>
     </div>
-    <h2 id="heading">Wildfire Cryptocurrency Analyzer Testing auto deploy</h2>
+    <h2 id="heading">Wildfire Cryptocurrency Analyzer</h2>
     <!-- <h5>Sorted by popularity, in descending order</h5> -->
     <div class="container">
 

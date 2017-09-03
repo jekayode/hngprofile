@@ -50,9 +50,9 @@
                          <th>S/no</th>
                          <th>Coin</th>
                          <th>Currency Pair</th>
-                         <th>Previous Buy trade Vol.</th>
-                         <th>Previous Total buy trade volume</th>
-                         <th>% of coin in previous total buy trade volume</th>
+                         <th>Buy trade Vol. 5mins ago</th>
+                         <th>Total buy trade vol. 5mins ago</th>
+                         <th>% of coin in total buy trade vol. 5mins ago</th>
                          <th>Current Buy trade Vol.</th>
                          <th>Current Total buy trade volume</th>
                          <th>% of coin in total buy trade volume</th>
@@ -66,6 +66,8 @@
 
                        // Lets fetch record from database
                        $records = fetchRecords();
+
+                       var_dump($records);
 
                        $total_trade_volume_resources = selectTotalCurrentBuy();
 
@@ -149,6 +151,9 @@
           <div class="col-md-12">
               <div class="alert alert-success" role="alert">
                   <h4>Who is gaining the shift?</h4>
+                  <p>
+                      Top Coin 5mins ago :
+                  </p>
                   <p>
                       <?=$most_popular_coin?> seems to be gaining the attention right now having a greater percentage shift of <?=$most_popular_coin_value?>%
                   </p>

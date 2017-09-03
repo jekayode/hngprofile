@@ -67,6 +67,8 @@
                        // Lets fetch record from database
                        $records = fetchRecords();
 
+                       echo "<pre>";
+
                        var_dump($records);
 
                        $total_trade_volume_resources = selectTotalCurrentBuy();

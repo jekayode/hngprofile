@@ -3,6 +3,9 @@
      error_reporting(0);
      require_once 'function/function.php';
 
+      $url1=$_SERVER['REQUEST_URI'];
+      header("Refresh: 5; URL=$url1");
+
        $last_time = selectPastTime();
 
       $last_time = $last_time[0]['date_saved'];

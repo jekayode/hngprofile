@@ -1,9 +1,11 @@
 <?php
-      ob_start();
-     error_reporting(0);
-     require_once 'function/function.php';
+    ob_start();
 
-       $last_time = selectPastTime();
+     error_reporting(0);
+
+     require_once 'function/function3.php';
+
+     $last_time = selectPastTime();
 
       $last_time = $last_time[0]['date_saved'];
 
@@ -125,9 +127,6 @@
 
                               $percentage_array[$record['coin']] = $percentage_change;
 
-                              $word = $percentage_change > 0 ? "an increase" : "a decrease";
-
-
                               //$update = updatePercentageChange ($percentage_change, $record['currencypair']);
 
                     ?>
@@ -156,6 +155,8 @@
 
                                $current_top_coin_details = GetCurrentTopCoinDetails($most_popular_coin);
 
+                               $word = $prev_top_coin_current_buy_trade < $prev_top_coin_buy_trade ? "an increase" : "a decrease";
+
                         ?>
 
                </tbody>
@@ -167,8 +168,6 @@
           <div class="col-md-12">
               <div class="alert alert-success" role="alert">
                   <h4>Who is gaining the shift?</h4>
-
-
 
                   <p>
                       <b>Top Coin 5mins ago:</b> <br>

@@ -118,6 +118,8 @@
                 $update_current_table = updateCurrentTable ($coin_name, $currency, $trade_sell, $trade_buy, $now);
                 $update_current_buy = updateCurrentBuyInPreviousTable ($trade_sell, $total_volume, $currency);
 
+                
+
             }
 
           }
